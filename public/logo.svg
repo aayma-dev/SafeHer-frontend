@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c0203a"/>
+      <stop offset="100%" stop-color="#7a1225"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.25)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Shield body -->
+  <path d="M100 18 L172 50 L172 102 C172 145 138 172 100 185 C62 172 28 145 28 102 L28 50 Z"
+        fill="url(#bg)" filter="url(#glow)"/>
+  <!-- Shine overlay -->
+  <path d="M100 18 L172 50 L172 102 C172 145 138 172 100 185 C62 172 28 145 28 102 L28 50 Z"
+        fill="url(#shine)" opacity="0.4"/>
+  <!-- Inner shield border -->
+  <path d="M100 30 L160 57 L160 102 C160 138 130 162 100 173 C70 162 40 138 40 102 L40 57 Z"
+        fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <!-- Heart cutout -->
+  <path d="M100 140 C100 140 68 116 68 96 C68 83 77 74 88 74 C94 74 100 80 100 80 C100 80 106 74 112 74 C123 74 132 83 132 96 C132 116 100 140 100 140 Z"
+        fill="white" opacity="0.95"/>
+  <!-- S letter inside heart -->
+  <text x="100" y="116" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="26" fill="#c0203a">S</text>
+</svg>
