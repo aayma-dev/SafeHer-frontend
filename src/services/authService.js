@@ -2,7 +2,20 @@ import api from './api'
 
 export const authService = {
   register: (data) => api.post('/api/auth/register', data),
-  login: (data) => api.post('/api/auth/login', data),
+
+  // ✅ FIXED LOGIN (Form Data for FastAPI)
+  login: (data) => {
+    const formData = new URLSearchParams()
+    formData.append('username', data.username)
+    formData.append('password', data.password)
+
+    return api.post('/api/auth/login', formData, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+  },
+
   logout: () => api.post('/api/auth/logout'),
   me: () => api.get('/api/auth/me'),
   updateProfile: (data) => api.patch('/api/auth/me', data),
