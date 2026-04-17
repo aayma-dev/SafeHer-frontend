@@ -3,10 +3,10 @@ import api from './api'
 export const authService = {
   register: (data) => api.post('/api/auth/register', data),
 
-  // ✅ FIXED LOGIN (JSON BODY - YOUR BACKEND NEEDS THIS)
+  // ✅ FIXED LOGIN (matches backend exactly)
   login: (data) =>
     api.post('/api/auth/login', {
-      username: data.username,
+      email: data.email,
       password: data.password,
     }),
 

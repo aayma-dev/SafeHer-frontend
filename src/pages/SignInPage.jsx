@@ -40,7 +40,7 @@ export default function SignInPage() {
     try {
       // FIXED: Mapping 'email' from your form to 'username' for the backend
       const loginPayload = {
-        username: values.email, 
+        email: values.email, 
         password: values.password
       }
       
