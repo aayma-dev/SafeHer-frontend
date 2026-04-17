@@ -3,9 +3,9 @@ import api from './api'
 const WS_URL = import.meta.env.VITE_WS_URL || 'ws://localhost:8000'
 
 export const alertService = {
-  triggerSOS: (data) => api.post('/sos', data),
+  triggerSOS: (data) => api.post('/api/sos', data),
 
-  getAlerts: () => api.get('/alerts'),
+  getAlerts: () => api.get('/api/alerts'),
 
   connectWebSocket: (userId, onMessage) => {
     const ws = new WebSocket(`${WS_URL}/ws/alerts/${userId}`)
