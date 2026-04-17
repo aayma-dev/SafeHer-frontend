@@ -1,18 +1,22 @@
 import axios from 'axios'
 
-const BASE_URL =
-  import.meta.env.VITE_API_URL || 'http://localhost:8000'
+const BASE_URL = import.meta.env.VITE_API_URL
 
 const api = axios.create({
   baseURL: BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
-  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+  withCredentials: false, // safer for cross-domain (Vercel + Replit)
 })
 
+// Attach token
 api.interceptors.request.use((config) => {
   try {
     const auth = JSON.parse(localStorage.getItem('safeher-auth') || '{}')
     const token = auth?.state?.token
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
@@ -23,6 +27,7 @@ api.interceptors.request.use((config) => {
   return config
 })
 
+// Global error handler
 api.interceptors.response.use(
   (res) => res,
   (err) => {
@@ -30,6 +35,7 @@ api.interceptors.response.use(
       localStorage.removeItem('safeher-auth')
       window.location.href = '/signin'
     }
+
     return Promise.reject(err)
   }
 )
