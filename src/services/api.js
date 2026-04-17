@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+// ✅ Use env in production, fallback to localhost for dev
+const BASE_URL =
+  import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -13,7 +15,9 @@ api.interceptors.request.use((config) => {
   try {
     const auth = JSON.parse(localStorage.getItem('safeher-auth') || '{}')
     const token = auth?.state?.token
-    if (token) config.headers.Authorization = `Bearer ${token}`
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
   } catch (error) {
     console.error('Auth parsing failed:', error)
   }
