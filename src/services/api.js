@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-// ✅ Use env in production, fallback to localhost for dev
 const BASE_URL =
   import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
@@ -10,7 +9,6 @@ const api = axios.create({
   withCredentials: true,
 })
 
-// Attach token from localStorage
 api.interceptors.request.use((config) => {
   try {
     const auth = JSON.parse(localStorage.getItem('safeher-auth') || '{}')
@@ -25,7 +23,6 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// Handle 401 globally
 api.interceptors.response.use(
   (res) => res,
   (err) => {
