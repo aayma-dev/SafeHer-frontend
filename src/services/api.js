@@ -8,7 +8,7 @@ const api = axios.create({
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
-  withCredentials: false, // safer for cross-domain (Vercel + Replit)
+  withCredentials: false,
 })
 
 // Attach token
@@ -27,7 +27,7 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// Global error handler
+// Handle errors
 api.interceptors.response.use(
   (res) => res,
   (err) => {
@@ -35,6 +35,9 @@ api.interceptors.response.use(
       localStorage.removeItem('safeher-auth')
       window.location.href = '/signin'
     }
+
+    // IMPORTANT: show real backend error in console
+    console.error("API Error:", err.response?.data || err.message)
 
     return Promise.reject(err)
   }
